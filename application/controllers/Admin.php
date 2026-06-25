@@ -13,18 +13,12 @@ class Admin extends CI_Controller
     public function index()
     {
         $data['judul'] = "Halaman Admin Pantai Pecaron";
-        $this->load->view('tampilan_admin', $data);
+        $this->load->view('admin/tampilan_admin', $data);
     }
 
-    public function register()
+    public function gambar()
     {
-        $data['judul'] = "Halaman Registrasi";
-        $this->load->view('register', $data);
-    }
-
-    public function login()
-    {
-        $data['judul'] = "Halaman Login";
-        $this->load->view('login-admin', $data);
+        $data['swict'] = "ganti gambar";
+        $this->load->view('admin/wisata', $data);
     }
 }
