@@ -8,5 +8,6 @@
 <body>
 	<h1>aldiman</h1>
 	<p>aldiman</p>
+	<p>Welcome to the user page!</p>
 </body>
 </html>
