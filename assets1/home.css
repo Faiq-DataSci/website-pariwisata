@@ -1,0 +1,369 @@
+/* Reset dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: times new roman, serif;
+    color: #333;
+    background-color: #f8f9fa;
+    line-height: 1.6;
+}
+
+/* Hero Section */
+#hero {
+    height: 100vh;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.4),
+        rgba(0, 0, 0, 0.4)
+    ),
+    url("../images/pantai-pancoran.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    color: white;
+}
+
+#hero h1 {
+    font-size: 56px;
+    margin-bottom: 15px;
+}
+
+#hero p {
+    font-size: 22px;
+}
+
+/* Section 2 */
+#hero2 {
+    padding: 80px 20px;
+    background-color: #ffffff;
+    text-align: center;
+
+}
+
+#hero2 h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+#hero2 p {
+    font-size: 18px;
+    color: #666;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Section 3 */
+#hero3 {
+    padding: 80px 20px;
+    background-color: #eef7ff;
+    text-align: center;
+}
+
+#hero3 h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+#hero3 p {
+    font-size: 18px;
+    color: #666;
+}
+
+#hero3 {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.video-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.video {
+    flex: 1;
+    min-width: 320px;
+}
+
+.video iframe {
+    width: 100%;
+    height: 350px;
+    border-radius: 10px;
+}
+
+.description {
+    flex: 1;
+    min-width: 320px;
+}
+
+.description h3 {
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+.description p {
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0099cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #0077aa;
+}
+
+/* HERO SECTION */
+#hero4 {
+    width: 100%;
+    height: 100vh; /* full layar */
+    position: relative;
+    overflow: hidden;
+}
+
+/* GAMBAR HERO */
+#hero4 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* TITLE */
+#services h2 {
+    text-align: center;
+    margin: 50px 0;
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+/* WRAPPER */
+.service-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* EACH SERVICE ITEM */
+.service-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background: #ffffff;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* IMAGE */
+.service-item img {
+    width: 280px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* TEXT */
+.service-text {
+    flex: 1;
+}
+
+.service-text h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: #0b4f8a;
+    text-transform: uppercase;
+}
+
+.service-text p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .service-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .service-item img {
+        width: 100%;
+        height: 220px;
+    }
+}
+
+/* Section */
+#gallery {
+    padding: 80px 20px;
+    background: #f5f7fa;
+    text-align: center;
+}
+
+/* Judul */
+.gallery-title {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.gallery-subtitle {
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* Container grid */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* Item gambar */
+.gallery-item {
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Gambar */
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* hover zoom */
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+
+.testimoni{
+    width:90%;
+    margin:40px auto;
+}
+
+.testimoni h1{
+    text-align:center;
+    margin-bottom:35px;
+    font-size:38px;
+    font-family:Georgia, serif;
+}
+
+.container{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.card{
+
+    width:320px;
+    padding:20px;
+
+    background:white;
+
+    border:1px solid #d4d4d4;
+    border-radius:10px;
+
+    transition:0.3s;
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+}
+
+.star{
+
+    color:#1e88e5;
+
+    font-size:20px;
+
+}
+
+.card p{
+
+    margin-top:15px;
+
+    line-height:1.7;
+
+    font-size:14px;
+
+    color:#555;
+
+}
+
+
+.user{
+
+    display:flex;
+
+    align-items:center;
+
+    margin-top:20px;
+
+}
+
+
+.user img{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+}
+
+
+.user span{
+
+    margin-left:12px;
+
+    color:#12355B;
+
+    font-weight:600;
+
+}
