@@ -10,7 +10,7 @@ class Website extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'Nusantara Travel';
+        $data['title'] = 'home';
 
         $this->load->view('website_public/layout/header', $data);
         $this->load->view('website_public/home', $data);

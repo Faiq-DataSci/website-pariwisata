@@ -1,9 +1,84 @@
 *{
-	margin: 0;
-	padding: 0;
-}
-body{
-	font-family: times new roman;
-	font-size: 16px;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
+body{
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 80px;
+
+    background:#fff;
+
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+
+/* Logo */
+
+.logo a{
+    text-decoration:none;
+    font-size:30px;
+    font-weight:bold;
+
+    color:#222;
+
+    font-family:"Times New Roman", serif;
+}
+
+.logo span{
+    color:#f7941d;
+}
+
+
+/* Menu */
+
+.menu{
+    display:flex;
+    align-items:center;
+    gap:35px;
+
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+
+    color:#222;
+
+    font-size:16px;
+
+    transition:0.3s;
+}
+
+.menu a:hover{
+    color:#f7941d;
+}
+
+
+/* Tombol Login dan Logout */
+
+.btn-login{
+
+    padding:10px 22px;
+
+    border-radius:30px;
+
+    background:#f7941d;
+
+    color:white !important;
+
+}
+
+.btn-login:hover{
+
+    background:#e67e00;
+
+}

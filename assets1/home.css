@@ -296,19 +296,15 @@ body {
 
     width:320px;
     padding:20px;
-
     background:white;
-
     border:1px solid #d4d4d4;
     border-radius:10px;
-
     transition:0.3s;
 }
 
 .card:hover{
 
     transform:translateY(-5px);
-
     box-shadow:0 5px 15px rgba(0,0,0,0.1);
 
 }
@@ -316,7 +312,6 @@ body {
 .star{
 
     color:#1e88e5;
-
     font-size:20px;
 
 }
@@ -324,11 +319,8 @@ body {
 .card p{
 
     margin-top:15px;
-
     line-height:1.7;
-
     font-size:14px;
-
     color:#555;
 
 }
@@ -337,9 +329,7 @@ body {
 .user{
 
     display:flex;
-
     align-items:center;
-
     margin-top:20px;
 
 }
@@ -348,22 +338,81 @@ body {
 .user img{
 
     width:45px;
-
     height:45px;
-
     border-radius:50%;
-
     object-fit:cover;
 
 }
 
 
 .user span{
-
     margin-left:12px;
-
     color:#12355B;
-
     font-weight:600;
 
+}
+
+.contact{
+    width:70%;
+    margin:80px auto;
+    text-align:center;
+}
+
+.contact h1{
+    font-size:40px;
+    font-family:"Times New Roman", serif;
+    letter-spacing:3px;
+    margin-bottom:40px;
+}
+
+.info{
+    display:flex;
+    justify-content:center;
+    gap:100px;
+    margin-bottom:50px;
+}
+
+.item i{
+    font-size:28px;
+    color:#000000;
+}
+
+.item p{
+    margin-top:10px;
+    font-size:14px;
+    color:#555;
+}
+
+.sosmed{
+    width:500px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.box{
+    width:150px;
+    height:150px;
+    background:#000000;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:0.3s;
+}
+
+.box i{
+    color:white;
+    font-size:22px;
+}
+
+.box:hover{
+    background:#000000; /* oranye */
+}
+
+.sosmed a{
+    text-decoration:none;
 }
