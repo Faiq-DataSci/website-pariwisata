@@ -6,6 +6,7 @@
 <div class="content-card">
     <div class="content-card-header">
         <h3>Kotak Masuk</h3>
+        <a href="<?= base_url('admin/tambah_kontak') ?>" class="btn btn-primary">Tambah Kontak</a>
     </div>
     <div class="content-card-body" style="padding: 0;">
         <div style="overflow-x: auto;">
@@ -20,33 +21,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="msg-unread">
-                        <td><span class="status-dot status-dot-unread"></span><strong>Andi Permana</strong></td>
-                        <td>andi@email.com<br>08123456789</td>
-                        <td>Apakah area camping buka selama libur lebaran? Dan berapa tarif sewa tenda per malamnya?</td>
-                        <td>25 Jun 2026</td>
+                    <?php foreach ($kontak as $k) : ?>
+                    <tr class="<?= strtolower($k->status) == 'unread' ? 'msg-unread' : 'msg-read' ?>">
                         <td>
-                            <button class="btn btn-sm btn-view">Balas</button>
+                            <?php if (strtolower($k->status) == 'unread') : ?>
+                                <span class="status-dot status-dot-unread"></span>
+                            <?php else : ?>
+                                <span class="status-dot status-dot-read"></span>
+                            <?php endif; ?>
+                            <strong><?= htmlspecialchars($k->pengirim) ?></strong>
+                        </td>
+                        <td><?= htmlspecialchars($k->email) ?><br><?= htmlspecialchars($k->no_hp) ?></td>
+                        <td><?= htmlspecialchars(strlen($k->isi_pesan) > 80 ? substr($k->isi_pesan, 0, 80) . '...' : $k->isi_pesan) ?></td>
+                        <td><?= date('d M Y', strtotime($k->tanggal)) ?></td>
+                        <td>
+                            <div class="action-btns" style="display: flex; gap: 5px;">
+                                <a href="<?= base_url('admin/edit_kontak/' . $k->id_kontak) ?>" class="btn btn-sm btn-edit" style="text-decoration: none;">Edit</a>
+                                <a href="<?= base_url('admin/hapus_kontak/' . $k->id_kontak) ?>" class="btn btn-sm btn-delete" style="text-decoration: none;" onclick="return confirm('Yakin ingin menghapus pesan ini?')">Hapus</a>
+                            </div>
                         </td>
                     </tr>
-                    <tr class="msg-unread">
-                        <td><span class="status-dot status-dot-unread"></span><strong>Siti Nurbaya</strong></td>
-                        <td>siti.n@email.com<br>08987654321</td>
-                        <td>Saya ingin reservasi tempat untuk rombongan 50 orang akhir bulan ini.</td>
-                        <td>24 Jun 2026</td>
-                        <td>
-                            <button class="btn btn-sm btn-view">Balas</button>
-                        </td>
-                    </tr>
-                    <tr class="msg-read">
-                        <td><span class="status-dot status-dot-read"></span>Bambang S.</td>
-                        <td>bambang@email.com<br>08776655443</td>
-                        <td>Terima kasih atas pelayanan yang ramah selama kami berkunjung ke Pantai Pecaron.</td>
-                        <td>20 Jun 2026</td>
-                        <td>
-                            <button class="btn btn-sm btn-view">Lihat</button>
-                        </td>
-                    </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

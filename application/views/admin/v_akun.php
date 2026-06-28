@@ -6,7 +6,7 @@
 <div class="content-card">
     <div class="content-card-header">
         <h3>Daftar Pengguna Aktif</h3>
-        <button class="btn btn-primary">Tambah Akun</button>
+        <a href="<?= base_url('admin/tambah_akun') ?>" class="btn btn-primary">Tambah Akun</a>
     </div>
     <div class="content-card-body" style="padding: 0;">
         <div style="overflow-x: auto;">
@@ -22,31 +22,29 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php 
+                    $no = 1;
+                    foreach ($akun as $a) : ?>
                     <tr>
-                        <td>1</td>
-                        <td><strong>Administrator Utama</strong></td>
-                        <td>admin1</td>
-                        <td><span class="badge badge-info">Super Admin</span></td>
-                        <td>Hari ini, 09:30</td>
+                        <td><?= $no++ ?></td>
+                        <td><strong><?= htmlspecialchars($a->nama_lengkap) ?></strong></td>
+                        <td><?= htmlspecialchars($a->username) ?></td>
+                        <td>
+                            <?php if (strtolower($a->role) == 'super admin') : ?>
+                                <span class="badge badge-info"><?= htmlspecialchars($a->role) ?></span>
+                            <?php else : ?>
+                                <span class="badge badge-success"><?= htmlspecialchars($a->role) ?></span>
+                            <?php endif; ?>
+                        </td>
+                        <td><?= $a->terakhir_login ? date('d M Y, H:i', strtotime($a->terakhir_login)) : '-' ?></td>
                         <td>
                             <div class="action-btns">
-                                <button class="btn btn-sm btn-edit">Edit</button>
+                                <a href="<?= base_url('admin/edit_akun/' . $a->id_admin) ?>" class="btn btn-sm btn-edit" style="text-decoration: none;">Edit</a>
+                                <a href="<?= base_url('admin/hapus_akun/' . $a->id_admin) ?>" class="btn btn-sm btn-delete" style="text-decoration: none;" onclick="return confirm('Yakin ingin menghapus akun ini?')">Hapus</a>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><strong>Budi Santoso</strong></td>
-                        <td>budi_admin</td>
-                        <td><span class="badge badge-success">Admin</span></td>
-                        <td>Kemarin, 14:15</td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn btn-sm btn-edit">Edit</button>
-                                <button class="btn btn-sm btn-delete">Hapus</button>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

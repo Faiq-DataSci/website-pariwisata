@@ -6,7 +6,7 @@
 <div class="content-card">
     <div class="content-card-header">
         <h3>Daftar Destinasi</h3>
-        <button class="btn btn-primary">Tambah Wisata</button>
+        <a href="<?= base_url('admin/tambah_wisata') ?>" class="btn btn-primary">Tambah Wisata</a>
     </div>
     <div class="content-card-body" style="padding: 0;">
         <div style="overflow-x: auto;">
@@ -22,45 +22,29 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php 
+                    $no = 1;
+                    foreach ($wisata as $w) : ?>
                     <tr>
-                        <td>1</td>
-                        <td><strong>Pantai Pecaron Utama</strong></td>
-                        <td>Area pantai berpasir putih...</td>
-                        <td>Pantai</td>
-                        <td><span class="badge badge-success">Aktif</span></td>
+                        <td><?= $no++ ?></td>
+                        <td><strong><?= htmlspecialchars($w->nama_wisata) ?></strong></td>
+                        <td><?= htmlspecialchars(strlen($w->deskripsi) > 50 ? substr($w->deskripsi, 0, 50) . '...' : $w->deskripsi) ?></td>
+                        <td><?= htmlspecialchars($w->kategori) ?></td>
+                        <td>
+                            <?php if (strtolower($w->status) == 'aktif') : ?>
+                                <span class="badge badge-success"><?= htmlspecialchars($w->status) ?></span>
+                            <?php else : ?>
+                                <span class="badge badge-warning"><?= htmlspecialchars($w->status) ?></span>
+                            <?php endif; ?>
+                        </td>
                         <td>
                             <div class="action-btns">
-                                <button class="btn btn-sm btn-edit">Edit</button>
-                                <button class="btn btn-sm btn-delete">Hapus</button>
+                                <a href="<?= base_url('admin/edit_wisata/' . $w->id_wisata) ?>" class="btn btn-sm btn-edit" style="text-decoration: none;">Edit</a>
+                                <a href="<?= base_url('admin/hapus_wisata/' . $w->id_wisata) ?>" class="btn btn-sm btn-delete" style="text-decoration: none;" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</a>
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><strong>Bukit Pecaron</strong></td>
-                        <td>Spot foto dengan pemandangan...</td>
-                        <td>Bukit</td>
-                        <td><span class="badge badge-success">Aktif</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn btn-sm btn-edit">Edit</button>
-                                <button class="btn btn-sm btn-delete">Hapus</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><strong>Area Camping</strong></td>
-                        <td>Tempat berkemah di pinggir...</td>
-                        <td>Fasilitas</td>
-                        <td><span class="badge badge-warning">Renovasi</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="btn btn-sm btn-edit">Edit</button>
-                                <button class="btn btn-sm btn-delete">Hapus</button>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

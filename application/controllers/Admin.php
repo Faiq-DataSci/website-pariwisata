@@ -25,32 +25,256 @@ class Admin extends CI_Controller
 
     public function wisata()
     {
+        $this->load->model('M_wisata');
         $data['title'] = "Kelola Wisata";
         $data['active_menu'] = "wisata";
+        $data['wisata'] = $this->M_wisata->get_data();
 
         $this->load->view('admin/layout/header', $data);
         $this->load->view('admin/v_wisata', $data);
         $this->load->view('admin/layout/footer');
     }
 
+    public function tambah_wisata()
+    {
+        $data['title'] = "Tambah Wisata";
+        $data['active_menu'] = "wisata";
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_wisata_tambah', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function tambah_wisata_aksi()
+    {
+        $this->load->model('M_wisata');
+        $nama_wisata = $this->input->post('nama_wisata');
+        $deskripsi = $this->input->post('deskripsi');
+        $kategori = $this->input->post('kategori');
+        $status = $this->input->post('status');
+
+        $data = array(
+            'nama_wisata' => $nama_wisata,
+            'deskripsi' => $deskripsi,
+            'kategori' => $kategori,
+            'status' => $status
+        );
+
+        $this->M_wisata->insert_data($data);
+        redirect('admin/wisata');
+    }
+
+    public function edit_wisata($id)
+    {
+        $this->load->model('M_wisata');
+        $data['title'] = "Edit Wisata";
+        $data['active_menu'] = "wisata";
+        $data['wisata'] = $this->M_wisata->get_data_by_id($id);
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_wisata_edit', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function edit_wisata_aksi()
+    {
+        $this->load->model('M_wisata');
+        $id = $this->input->post('id_wisata');
+        $nama_wisata = $this->input->post('nama_wisata');
+        $deskripsi = $this->input->post('deskripsi');
+        $kategori = $this->input->post('kategori');
+        $status = $this->input->post('status');
+
+        $data = array(
+            'nama_wisata' => $nama_wisata,
+            'deskripsi' => $deskripsi,
+            'kategori' => $kategori,
+            'status' => $status
+        );
+
+        $where = array('id_wisata' => $id);
+        $this->M_wisata->update_data($data, $where);
+        redirect('admin/wisata');
+    }
+
+    public function hapus_wisata($id)
+    {
+        $this->load->model('M_wisata');
+        $where = array('id_wisata' => $id);
+        $this->M_wisata->delete_data($where);
+        redirect('admin/wisata');
+    }
+
     public function artikel()
     {
+        $this->load->model('M_artikel');
         $data['title'] = "Kelola Artikel";
         $data['active_menu'] = "artikel";
+        $data['artikel'] = $this->M_artikel->get_data();
 
         $this->load->view('admin/layout/header', $data);
         $this->load->view('admin/v_artikel', $data);
         $this->load->view('admin/layout/footer');
     }
 
+    public function tambah_artikel()
+    {
+        $data['title'] = "Tambah Artikel";
+        $data['active_menu'] = "artikel";
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_artikel_tambah', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function tambah_artikel_aksi()
+    {
+        $this->load->model('M_artikel');
+        $judul = $this->input->post('judul');
+        $penulis = $this->input->post('penulis');
+        $tanggal = $this->input->post('tanggal');
+        $konten = $this->input->post('konten');
+        $status = $this->input->post('status');
+
+        $data = array(
+            'judul' => $judul,
+            'penulis' => $penulis,
+            'tanggal' => $tanggal,
+            'konten' => $konten,
+            'status' => $status
+        );
+
+        $this->M_artikel->insert_data($data);
+        redirect('admin/artikel');
+    }
+
+    public function edit_artikel($id)
+    {
+        $this->load->model('M_artikel');
+        $data['title'] = "Edit Artikel";
+        $data['active_menu'] = "artikel";
+        $data['artikel'] = $this->M_artikel->get_data_by_id($id);
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_artikel_edit', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function edit_artikel_aksi()
+    {
+        $this->load->model('M_artikel');
+        $id = $this->input->post('id_artikel');
+        $judul = $this->input->post('judul');
+        $penulis = $this->input->post('penulis');
+        $tanggal = $this->input->post('tanggal');
+        $konten = $this->input->post('konten');
+        $status = $this->input->post('status');
+
+        $data = array(
+            'judul' => $judul,
+            'penulis' => $penulis,
+            'tanggal' => $tanggal,
+            'konten' => $konten,
+            'status' => $status
+        );
+
+        $where = array('id_artikel' => $id);
+        $this->M_artikel->update_data($data, $where);
+        redirect('admin/artikel');
+    }
+
+    public function hapus_artikel($id)
+    {
+        $this->load->model('M_artikel');
+        $where = array('id_artikel' => $id);
+        $this->M_artikel->delete_data($where);
+        redirect('admin/artikel');
+    }
+
     public function akun()
     {
+        $this->load->model('M_akun');
         $data['title'] = "Kelola Akun";
         $data['active_menu'] = "akun";
+        $data['akun'] = $this->M_akun->get_data();
 
         $this->load->view('admin/layout/header', $data);
         $this->load->view('admin/v_akun', $data);
         $this->load->view('admin/layout/footer');
+    }
+
+    public function tambah_akun()
+    {
+        $data['title'] = "Tambah Akun";
+        $data['active_menu'] = "akun";
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_akun_tambah', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function tambah_akun_aksi()
+    {
+        $this->load->model('M_akun');
+        $nama_lengkap = $this->input->post('nama_lengkap');
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $role = $this->input->post('role');
+
+        $data = array(
+            'nama_lengkap' => $nama_lengkap,
+            'username' => $username,
+            'password' => md5($password),
+            'role' => $role
+        );
+
+        $this->M_akun->insert_data($data);
+        redirect('admin/akun');
+    }
+
+    public function edit_akun($id)
+    {
+        $this->load->model('M_akun');
+        $data['title'] = "Edit Akun";
+        $data['active_menu'] = "akun";
+        $data['akun'] = $this->M_akun->get_data_by_id($id);
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_akun_edit', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function edit_akun_aksi()
+    {
+        $this->load->model('M_akun');
+        $id = $this->input->post('id_admin');
+        $nama_lengkap = $this->input->post('nama_lengkap');
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+        $role = $this->input->post('role');
+
+        $data = array(
+            'nama_lengkap' => $nama_lengkap,
+            'username' => $username,
+            'role' => $role
+        );
+
+        // Jika password diisi, maka update password
+        if (!empty($password)) {
+            $data['password'] = md5($password);
+        }
+
+        $where = array('id_admin' => $id);
+        $this->M_akun->update_data($data, $where);
+        redirect('admin/akun');
+    }
+
+    public function hapus_akun($id)
+    {
+        $this->load->model('M_akun');
+        $where = array('id_admin' => $id);
+        $this->M_akun->delete_data($where);
+        redirect('admin/akun');
     }
 
     public function admin()
@@ -61,22 +285,163 @@ class Admin extends CI_Controller
 
     public function gambar()
     {
+        $this->load->model('M_gambar');
         $data['title'] = "Kelola Gambar";
         $data['active_menu'] = "gambar";
+        $data['gambar'] = $this->M_gambar->get_data();
 
         $this->load->view('admin/layout/header', $data);
         $this->load->view('admin/v_gambar', $data);
         $this->load->view('admin/layout/footer');
     }
 
+    public function tambah_gambar()
+    {
+        $data['title'] = "Tambah Gambar";
+        $data['active_menu'] = "gambar";
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_gambar_tambah', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function tambah_gambar_aksi()
+    {
+        $this->load->model('M_gambar');
+        $keterangan = $this->input->post('keterangan');
+
+        // Create directory if not exists
+        $upload_path = './assets/images/gallery/';
+        if (!is_dir($upload_path)) {
+            mkdir($upload_path, 0777, true);
+        }
+
+        $config['upload_path']          = $upload_path;
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
+        $config['max_size']             = 2048; // 2MB
+        $config['encrypt_name']         = TRUE;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('file_gambar')) {
+            $uploadData = $this->upload->data();
+            $file_name = $uploadData['file_name'];
+            
+            $data = array(
+                'keterangan' => $keterangan,
+                'file_gambar' => $file_name
+            );
+            $this->M_gambar->insert_data($data);
+            redirect('admin/gambar');
+        } else {
+            redirect('admin/gambar');
+        }
+    }
+
+    public function hapus_gambar($id)
+    {
+        $this->load->model('M_gambar');
+        $gambar = $this->M_gambar->get_data_by_id($id);
+        
+        if ($gambar) {
+            $path = './assets/images/gallery/' . $gambar->file_gambar;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+            $where = array('id_gambar' => $id);
+            $this->M_gambar->delete_data($where);
+        }
+        redirect('admin/gambar');
+    }
+
     public function kontak()
     {
+        $this->load->model('M_kontak');
         $data['title'] = "Kelola Kontak";
         $data['active_menu'] = "kontak";
+        $data['kontak'] = $this->M_kontak->get_data();
 
         $this->load->view('admin/layout/header', $data);
         $this->load->view('admin/v_kontak', $data);
         $this->load->view('admin/layout/footer');
+    }
+
+    public function tambah_kontak()
+    {
+        $data['title'] = "Tambah Kontak";
+        $data['active_menu'] = "kontak";
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_kontak_tambah', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function tambah_kontak_aksi()
+    {
+        $this->load->model('M_kontak');
+        $pengirim = $this->input->post('pengirim');
+        $email = $this->input->post('email');
+        $no_hp = $this->input->post('no_hp');
+        $isi_pesan = $this->input->post('isi_pesan');
+        $tanggal = $this->input->post('tanggal');
+        $status = $this->input->post('status');
+
+        $data = array(
+            'pengirim' => $pengirim,
+            'email' => $email,
+            'no_hp' => $no_hp,
+            'isi_pesan' => $isi_pesan,
+            'tanggal' => $tanggal,
+            'status' => $status
+        );
+
+        $this->M_kontak->insert_data($data);
+        redirect('admin/kontak');
+    }
+
+    public function edit_kontak($id)
+    {
+        $this->load->model('M_kontak');
+        $data['title'] = "Edit Kontak";
+        $data['active_menu'] = "kontak";
+        $data['kontak'] = $this->M_kontak->get_data_by_id($id);
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_kontak_edit', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function edit_kontak_aksi()
+    {
+        $this->load->model('M_kontak');
+        $id = $this->input->post('id_kontak');
+        $pengirim = $this->input->post('pengirim');
+        $email = $this->input->post('email');
+        $no_hp = $this->input->post('no_hp');
+        $isi_pesan = $this->input->post('isi_pesan');
+        $tanggal = $this->input->post('tanggal');
+        $status = $this->input->post('status');
+
+        $data = array(
+            'pengirim' => $pengirim,
+            'email' => $email,
+            'no_hp' => $no_hp,
+            'isi_pesan' => $isi_pesan,
+            'tanggal' => $tanggal,
+            'status' => $status
+        );
+
+        $where = array('id_kontak' => $id);
+        $this->M_kontak->update_data($data, $where);
+        redirect('admin/kontak');
+    }
+
+    public function hapus_kontak($id)
+    {
+        $this->load->model('M_kontak');
+        $where = array('id_kontak' => $id);
+        $this->M_kontak->delete_data($where);
+        redirect('admin/kontak');
     }
 
     public function logout()
