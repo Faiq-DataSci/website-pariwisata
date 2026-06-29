@@ -1,54 +1,47 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= isset($title) ? $title : 'Nusantara Travel'; ?></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><?= $title ?></title>
 
-    <style>
-        body{
-            margin:0;
-            font-family:Arial,sans-serif;
-        }
-
-        header{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding:15px 50px;
-            background:#fff;
-            box-shadow:0 2px 5px rgba(0,0,0,.1);
-        }
-
-        nav a{
-            text-decoration:none;
-            margin:0 15px;
-            color:#333;
-            font-weight:bold;
-        }
-
-        .book{
-            background:#007BFF;
-            color:#fff;
-            padding:10px 20px;
-            border-radius:20px;
-            text-decoration:none;
-        }
-    </style>
+	<link rel="stylesheet" href="<?= base_url('assets1/style.css') ?>">
 </head>
+
 <body>
 
-<header>
+	<header>
+		<nav class="navbar">
 
-    <h2>Nusantara Travel</h2>
+			<div class="logo">
+				<a href="<?= site_url('website') ?>">
+					<span>Nusantara</span> Travel
+				</a>
+			</div>
 
-    <nav>
-        <a href="<?= site_url('website'); ?>">Home</a>
-        <a href="<?= site_url('website/destinations'); ?>">Destinations</a>
-        <a href="<?= site_url('website/blog'); ?>">Blog</a>
-        <a href="<?= site_url('website/about'); ?>">About Us</a>
-    </nav>
+			<ul class="menu">
 
-    <a href="#" class="book">Book Now</a>
+				<li>
+					<a href="<?= site_url('website') ?>">Home</a>
+				</li>
 
-</header>
+				<li>
+					<a href="<?= site_url('website/destinations') ?>">Destinations</a>
+				</li>
+
+				<li>
+					<a href="<?= site_url('website/blog') ?>">Blog</a>
+				</li>
+
+				<li>
+					<a href="<?= site_url('website/about') ?>">About Us</a>
+				</li>
+
+			</ul>
+
+			<div class="btn-login">
+				<a href="<?= site_url('auth'); ?>" class="btn-login">Login</a>
+			</div>
+		</nav>
+	</header>

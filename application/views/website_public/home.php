@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><?= isset($title) ? $title : 'home'; ?></title>
 	<link rel="stylesheet" href="<?= base_url('assets1/home.css'); ?>">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
@@ -123,71 +124,140 @@
 
 	<section class="testimoni">
 
-    <h1>VOICE OF PARADISE</h1>
+		<h1>VOICE OF PARADISE</h1>
 
-    <div class="container">
+		<div class="container">
 
-        <div class="card">
+			<div class="card">
 
-            <div class="star">★★★★★</div>
+				<div class="star">★★★★★</div>
 
-            <p>
-                Salah satu hidden gem di Kebumen.
-                Air laut yang jernih, pasir putih,
-                dan pemandangan tebing yang memukau
-                membuat pengalaman berwisata
-                menjadi lebih berkesan.
-            </p>
+				<p>
+					Salah satu hidden gem di Kebumen.
+					Air laut yang jernih, pasir putih,
+					dan pemandangan tebing yang memukau
+					membuat pengalaman berwisata
+					menjadi lebih berkesan.
+				</p>
 
-            <div class="user">
-                <img src="user1.jpg" alt="">
-                <span>Faiq Atha</span>
-            </div>
+				<div class="user">
+					<img src="user1.jpg" alt="">
+					<span>Faiq Atha</span>
+				</div>
 
-        </div>
-
-
-        <div class="card">
-
-            <div class="star">★★★★★</div>
-
-            <p>
-                "One of the best beaches in Kebumen.
-                The environment is calm and relaxing,
-                making it ideal for family trips and
-                weekend getaways."
-            </p>
-
-            <div class="user">
-                <img src="user2.jpg" alt="">
-                <span>Jonathan Abdi</span>
-            </div>
-
-        </div>
+			</div>
 
 
+			<div class="card">
 
-        <div class="card">
+				<div class="star">★★★★★</div>
 
-            <div class="star">★★★★★</div>
+				<p>
+					"One of the best beaches in Kebumen.
+					The environment is calm and relaxing,
+					making it ideal for family trips and
+					weekend getaways."
+				</p>
 
-            <p>
-                Bar pisan takon nang kana,
-                langsung seneng. Pantaine resik,
-                banyune bening lan suasane
-                isih alami. Mantep.
-            </p>
+				<div class="user">
+					<img src="user2.jpg" alt="">
+					<span>Jonathan Abdi</span>
+				</div>
 
-            <div class="user">
-                <img src="user3.jpg" alt="">
-                <span>Raden Aldiman</span>
-            </div>
+			</div>
 
-        </div>
 
-    </div>
 
-</section>
+			<div class="card">
+
+				<div class="star">★★★★★</div>
+
+				<p>
+					Bar pisan takon nang kana,
+					langsung seneng. Pantaine resik,
+					banyune bening lan suasane
+					isih alami. Mantep.
+				</p>
+
+				<div class="user">
+					<img src="user3.jpg" alt="">
+					<span>Raden Aldiman</span>
+				</div>
+
+			</div>
+
+		</div>
+
+	</section>
+
+	<section class="contact">
+
+		<h1>CONTACT</h1>
+
+
+		<div class="info">
+
+			<div class="item">
+				<i class="fa-solid fa-share-nodes"></i>
+				<p>Follow Us</p>
+			</div>
+
+			<div class="item">
+				<i class="fa-regular fa-map"></i>
+				<p>Visit Us</p>
+			</div>
+
+			<div class="item">
+				<i class="fa-regular fa-message"></i>
+				<p>Contact Us</p>
+			</div>
+
+		</div>
+
+
+
+		<div class="sosmed">
+
+			<a href="#">
+				<div class="box">
+					<i class="fa-brands fa-instagram"></i>
+				</div>
+			</a>
+
+			<a href="#">
+				<div class="box">
+					<i class="fa-solid fa-mobile-screen"></i>
+				</div>
+			</a>
+
+			<a href="#">
+				<div class="box">
+					<i class="fa-regular fa-envelope"></i>
+				</div>
+			</a>
+
+			<a href="#">
+				<div class="box">
+					<i class="fa-brands fa-facebook-f"></i>
+				</div>
+			</a>
+
+			<a href="#">
+				<div class="box">
+					<i class="fa-brands fa-youtube"></i>
+				</div>
+			</a>
+
+			<a href="#">
+				<div class="box">
+					<i class="fa-brands fa-tiktok"></i>
+				</div>
+			</a>
+
+		</div>
+
+	</section>
+
 
 
 </body>
