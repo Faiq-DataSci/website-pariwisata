@@ -5,7 +5,7 @@
 
 <div class="welcome-banner">
     <h2>Selamat Datang, Admin!</h2>
-    <p>Kelola semua konten pariwisata Pantai Pecaron dengan mudah dan cepat. Pantau aktivitas terbaru dan statistik pengunjung melalui panel ini.</p>
+    <p>Kelola Website pariwisata Pantai Pecaron. Yang Mengakses Admin Hanyalah Kelompok Sains Data.</p>
 </div>
 
 <div class="stats-grid">
@@ -16,10 +16,10 @@
                 <div class="menu-icon icon-wisata"></div>
             </div>
         </div>
-        <div class="stat-card-value">12</div>
+        <div class="stat-card-value"><?= number_format($total_wisata ?? 0) ?></div>
         <div class="stat-card-desc">Destinasi terdaftar</div>
     </div>
-    
+
     <div class="stat-card">
         <div class="stat-card-header">
             <span class="stat-card-label">Total Artikel</span>
@@ -27,10 +27,10 @@
                 <div class="menu-icon icon-artikel"></div>
             </div>
         </div>
-        <div class="stat-card-value">45</div>
+        <div class="stat-card-value"><?= number_format($total_artikel_published ?? 0) ?></div>
         <div class="stat-card-desc">Artikel dipublikasi</div>
     </div>
-    
+
     <div class="stat-card">
         <div class="stat-card-header">
             <span class="stat-card-label">Akun Pengguna</span>
@@ -38,10 +38,10 @@
                 <div class="menu-icon icon-akun"></div>
             </div>
         </div>
-        <div class="stat-card-value">120</div>
+        <div class="stat-card-value"><?= number_format($total_akun ?? 0) ?></div>
         <div class="stat-card-desc">Pengguna aktif</div>
     </div>
-    
+
     <div class="stat-card">
         <div class="stat-card-header">
             <span class="stat-card-label">Pesan Baru</span>
@@ -49,7 +49,7 @@
                 <div class="menu-icon icon-kontak"></div>
             </div>
         </div>
-        <div class="stat-card-value">8</div>
+        <div class="stat-card-value"><?= number_format($total_pesan_baru ?? 0) ?></div>
         <div class="stat-card-desc">Belum dibaca</div>
     </div>
 </div>

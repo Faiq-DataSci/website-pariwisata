@@ -15,8 +15,14 @@ class Admin extends CI_Controller
 
     public function index()
     {
+        $this->load->model(['M_wisata', 'M_artikel', 'M_akun', 'M_kontak']);
+
         $data['title'] = "Dashboard";
         $data['active_menu'] = "dashboard";
+        $data['total_wisata'] = $this->M_wisata->count_all();
+        $data['total_artikel_published'] = $this->M_artikel->count_published();
+        $data['total_akun'] = $this->M_akun->count_all();
+        $data['total_pesan_baru'] = $this->M_kontak->count_unread();
 
         $this->load->view('admin/layout/header', $data);
         $this->load->view('admin/v_admin', $data);
@@ -326,7 +332,7 @@ class Admin extends CI_Controller
         if ($this->upload->do_upload('file_gambar')) {
             $uploadData = $this->upload->data();
             $file_name = $uploadData['file_name'];
-            
+
             $data = array(
                 'keterangan' => $keterangan,
                 'file_gambar' => $file_name
@@ -342,7 +348,7 @@ class Admin extends CI_Controller
     {
         $this->load->model('M_gambar');
         $gambar = $this->M_gambar->get_data_by_id($id);
-        
+
         if ($gambar) {
             $path = './assets/images/gallery/' . $gambar->file_gambar;
             if (file_exists($path)) {

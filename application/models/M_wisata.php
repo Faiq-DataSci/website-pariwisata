@@ -25,6 +25,11 @@ class M_wisata extends CI_Model
         return $this->db->get('wisata')->result();
     }
 
+    public function count_all()
+    {
+        return $this->db->count_all('wisata');
+    }
+
     public function insert_data($data)
     {
         return $this->db->insert('wisata', $data);

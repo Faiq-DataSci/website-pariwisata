@@ -27,6 +27,13 @@ class M_kontak extends CI_Model
         return $this->db->get('kontak')->result();
     }
 
+    public function count_unread()
+    {
+        $this->db->from('kontak');
+        $this->db->where("LOWER(status) = 'unread'");
+        return $this->db->count_all_results();
+    }
+
     public function insert_data($data)
     {
         return $this->db->insert('kontak', $data);

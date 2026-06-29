@@ -26,6 +26,11 @@ class M_akun extends CI_Model
         return $this->db->get('tbl_admin')->result();
     }
 
+    public function count_all()
+    {
+        return $this->db->count_all('tbl_admin');
+    }
+
     public function insert_data($data)
     {
         return $this->db->insert('tbl_admin', $data);

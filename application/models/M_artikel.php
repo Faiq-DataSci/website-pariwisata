@@ -26,6 +26,13 @@ class M_artikel extends CI_Model
         return $this->db->get('artikel')->result();
     }
 
+    public function count_published()
+    {
+        $this->db->from('artikel');
+        $this->db->where("LOWER(status) = 'publikasi'");
+        return $this->db->count_all_results();
+    }
+
     public function insert_data($data)
     {
         return $this->db->insert('artikel', $data);
