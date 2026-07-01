@@ -18,9 +18,7 @@
 	<section id="hero3">
 
 		<h2 class="section-title">Pantai Pancoran</h2>
-
 		<div class="video-content">
-
 			<div class="video">
 				<iframe
 					width="560"
@@ -64,6 +62,9 @@
 				<div class="service-text">
 					<h3>Keindahan Panorama</h3>
 					<p>Penjelasan layanan wisata pantai...</p>
+					<a href="<?php echo site_url('website/camping_area'); ?>" class="btn">
+						Pelajari Lebih Lanjut
+					</a>
 				</div>
 			</div>
 
@@ -72,6 +73,7 @@
 				<div class="service-text">
 					<h3>Glamping Pecaron</h3>
 					<p>Penjelasan glamping...</p>
+					<a href="#" class="btn">Pelajari Lebih Lanjut</a>
 				</div>
 			</div>
 
@@ -79,7 +81,19 @@
 				<img src="img3.jpg">
 				<div class="service-text">
 					<h3>Camping Area</h3>
-					<p>Penjelasan camping...</p>
+					<p>Camping Area merupakan area yang disediakan bagi wisatawan yang ingin berkemah dan menikmati suasana alam secara lebih dekat. Pengunjung dapat mendirikan tenda di lokasi yang telah ditentukan sambil menikmati udara segar, pemandangan alam, serta suasana yang tenang. Area ini cocok untuk kegiatan bersama keluarga, teman, maupun komunitas. Demi menjaga kenyamanan dan kelestarian lingkungan, pengunjung diharapkan menjaga kebersihan, mematuhi peraturan yang berlaku, dan tidak merusak fasilitas maupun alam di sekitar area perkemahan.
+					</p>
+					<a href="#" class="btn">Pelajari Lebih Lanjut</a>
+				</div>
+			</div>
+
+			<div class="service-item">
+				<img src="img3.jpg">
+				<div class="service-text">
+					<h3>Camping Area</h3>
+					<p>Camping Area merupakan area yang disediakan bagi wisatawan yang ingin berkemah dan menikmati suasana alam secara lebih dekat. Pengunjung dapat mendirikan tenda di lokasi yang telah ditentukan sambil menikmati udara segar, pemandangan alam, serta suasana yang tenang. Area ini cocok untuk kegiatan bersama keluarga, teman, maupun komunitas. Demi menjaga kenyamanan dan kelestarian lingkungan, pengunjung diharapkan menjaga kebersihan, mematuhi peraturan yang berlaku, dan tidak merusak fasilitas maupun alam di sekitar area perkemahan.
+					</p>
+					<a href="#" class="btn">Pelajari Lebih Lanjut</a>
 				</div>
 			</div>
 
@@ -127,11 +141,8 @@
 		<h1>VOICE OF PARADISE</h1>
 
 		<div class="container">
-
 			<div class="card">
-
 				<div class="star">★★★★★</div>
-
 				<p>
 					Salah satu hidden gem di Kebumen.
 					Air laut yang jernih, pasir putih,
@@ -149,9 +160,7 @@
 
 
 			<div class="card">
-
 				<div class="star">★★★★★</div>
-
 				<p>
 					"One of the best beaches in Kebumen.
 					The environment is calm and relaxing,
@@ -169,9 +178,7 @@
 
 
 			<div class="card">
-
 				<div class="star">★★★★★</div>
-
 				<p>
 					Bar pisan takon nang kana,
 					langsung seneng. Pantaine resik,

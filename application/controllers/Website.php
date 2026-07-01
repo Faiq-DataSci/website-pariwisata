@@ -41,4 +41,13 @@ class Website extends CI_Controller
 		$this->load->view('website_public/about', $data);
 		$this->load->view('website_public/layout/footer', $data);
 	}
+
+	public function camping_area()
+	{
+		$data['title'] = 'camping_area';
+
+		$this->load->view('website_public/layout/header', $data);
+		$this->load->view('website_public/layout1/camping_area', $data);
+		$this->load->view('website_public/layout/footer', $data);
+	}
 }
