@@ -59,12 +59,51 @@ class Admin extends CI_Controller
         $kategori = $this->input->post('kategori');
         $status = $this->input->post('status');
 
+        $file_name = '';
+        if (!empty($_FILES['file_gambar']['name'])) {
+            $upload_path = './assets/images/wisata/';
+            if (!is_dir($upload_path)) {
+                mkdir($upload_path, 0777, true);
+            }
+
+            $config['upload_path']          = $upload_path;
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['max_size']             = 2048; // 2MB
+            $config['encrypt_name']         = TRUE;
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('file_gambar')) {
+                $uploadData = $this->upload->data();
+                $file_name = $uploadData['file_name'];
+
+                // Optimize image size
+                $this->load->library('image_lib');
+                $config_img = array(
+                    'image_library'  => 'gd2',
+                    'source_image'   => $upload_path . $file_name,
+                    'new_image'      => $upload_path . $file_name,
+                    'width'          => 600,
+                    'height'         => 400,
+                    'maintain_ratio' => TRUE,
+                    'quality'        => '85%'
+                );
+                $this->image_lib->initialize($config_img);
+                $this->image_lib->resize();
+                $this->image_lib->clear();
+            }
+        }
+
         $data = array(
             'nama_wisata' => $nama_wisata,
             'deskripsi' => $deskripsi,
             'kategori' => $kategori,
             'status' => $status
         );
+
+        if (!empty($file_name)) {
+            $data['file_gambar'] = $file_name;
+        }
 
         $this->M_wisata->insert_data($data);
         redirect('admin/wisata');
@@ -91,12 +130,59 @@ class Admin extends CI_Controller
         $kategori = $this->input->post('kategori');
         $status = $this->input->post('status');
 
+        $file_name = '';
+        if (!empty($_FILES['file_gambar']['name'])) {
+            $wisata = $this->M_wisata->get_data_by_id($id);
+            if ($wisata && !empty($wisata->file_gambar)) {
+                $old_path = './assets/images/wisata/' . $wisata->file_gambar;
+                if (file_exists($old_path)) {
+                    unlink($old_path);
+                }
+            }
+
+            $upload_path = './assets/images/wisata/';
+            if (!is_dir($upload_path)) {
+                mkdir($upload_path, 0777, true);
+            }
+
+            $config['upload_path']          = $upload_path;
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['max_size']             = 2048; // 2MB
+            $config['encrypt_name']         = TRUE;
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('file_gambar')) {
+                $uploadData = $this->upload->data();
+                $file_name = $uploadData['file_name'];
+
+                // Optimize image size
+                $this->load->library('image_lib');
+                $config_img = array(
+                    'image_library'  => 'gd2',
+                    'source_image'   => $upload_path . $file_name,
+                    'new_image'      => $upload_path . $file_name,
+                    'width'          => 600,
+                    'height'         => 400,
+                    'maintain_ratio' => TRUE,
+                    'quality'        => '85%'
+                );
+                $this->image_lib->initialize($config_img);
+                $this->image_lib->resize();
+                $this->image_lib->clear();
+            }
+        }
+
         $data = array(
             'nama_wisata' => $nama_wisata,
             'deskripsi' => $deskripsi,
             'kategori' => $kategori,
             'status' => $status
         );
+
+        if (!empty($file_name)) {
+            $data['file_gambar'] = $file_name;
+        }
 
         $where = array('id_wisata' => $id);
         $this->M_wisata->update_data($data, $where);
@@ -106,6 +192,15 @@ class Admin extends CI_Controller
     public function hapus_wisata($id)
     {
         $this->load->model('M_wisata');
+        $wisata = $this->M_wisata->get_data_by_id($id);
+
+        if ($wisata && !empty($wisata->file_gambar)) {
+            $path = './assets/images/wisata/' . $wisata->file_gambar;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+        }
+
         $where = array('id_wisata' => $id);
         $this->M_wisata->delete_data($where);
         redirect('admin/wisata');

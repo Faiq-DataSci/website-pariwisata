@@ -52,4 +52,20 @@ class M_akun extends CI_Model
         $this->db->where($where);
         return $this->db->delete('tbl_admin');
     }
+
+    public function verify_login($username, $password)
+    {
+        $user = $this->db->get_where('tbl_admin', array('username' => $username))->row();
+        if ($user && $user->password == md5($password)) {
+            return $user;
+        }
+        return null;
+    }
+
+    public function update_last_login($id_admin)
+    {
+        $data = array('terakhir_login' => date('Y-m-d H:i:s'));
+        $this->db->where('id_admin', $id_admin);
+        return $this->db->update('tbl_admin', $data);
+    }
 }

@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Website extends CI_Controller
 {
@@ -10,7 +10,12 @@ class Website extends CI_Controller
 
     public function index()
     {
+        $this->load->model('M_gambar');
+        $this->load->model('M_wisata');
+
         $data['title'] = 'home';
+        $data['gallery_images'] = $this->M_gambar->get_data();
+        $data['services'] = $this->M_wisata->get_data();
 
         $this->load->view('website_public/layout/header', $data);
         $this->load->view('website_public/home', $data);
@@ -28,7 +33,9 @@ class Website extends CI_Controller
 
     public function blog()
     {
+        $this->load->model('M_artikel');
         $data['title'] = 'Blog';
+        $data['articles'] = $this->M_artikel->get_data_by_status('Publikasi');
 
         $this->load->view('website_public/layout/header', $data);
         $this->load->view('website_public/blog', $data);

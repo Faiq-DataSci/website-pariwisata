@@ -11,35 +11,41 @@
 <body>
 	<section class="blog-section">
 
-		<div class="blog-card">
+		<?php if (!empty($articles)) :
+			$featured = $articles[0];
+		?>
+			<div class="blog-card">
 
-			<div class="blog-content">
+				<div class="blog-content">
 
-				<span class="kategori">
-					TERPOPULER
-				</span>
+					<span class="kategori">
+						TERPOPULER
+					</span>
 
-				<h1>
-					Pantai Pecaron <br>
-					Perhutani, The Hidden <br>
-					Paradise di Kebumen
-				</h1>
+					<h1>
+						<?= htmlspecialchars(strlen($featured->judul) > 60 ? substr($featured->judul, 0, 60) . '...' : $featured->judul) ?>
+					</h1>
 
-				<p>
+					<p>
+						<?= htmlspecialchars(strlen($featured->konten) > 150 ? substr($featured->konten, 0, 150) . '...' : $featured->konten) ?>
+					</p>
 
-					Pecaron terkenal dengan keindahan pantainya yang bersih dan eksotis,
-					membentang di sepanjang pesisir selatan Jawa Barat di sisi tepian.
-					Dengan ditumbuhi barisan pohon kelapa membuat sejuknya suasana pantai.
+					<a href="#" class="btn-blog">
+						Baca Selengkapnya →
+					</a>
 
-				</p>
-
-				<a href="#" class="btn-blog">
-					Baca Selengkapnya →
-				</a>
+				</div>
 
 			</div>
-
-		</div>
+		<?php else : ?>
+			<div class="blog-card">
+				<div class="blog-content">
+					<span class="kategori">BELUM ADA ARTIKEL</span>
+					<h1>Belum ada artikel yang dipublikasikan</h1>
+					<p>Admin masih menyiapkan artikel menarik untuk Anda. Silakan kembali lagi nanti.</p>
+				</div>
+			</div>
+		<?php endif; ?>
 
 	</section>
 
@@ -49,18 +55,12 @@
 
 			<a href="#" class="active">Semua</a>
 
-			<a href="#">Tips Perjalanan</a>
-
-			<a href="#">Panduan Kuliner</a>
-
-			<a href="#">Cerita Wisatawan</a>
-
 		</div>
 
 
 		<div class="search-blog">
 
-			<input type="text" placeholder="Cari artikel...">
+			<input type="text" placeholder="Cari artikel..." id="search-artikel">
 
 		</div>
 
@@ -68,79 +68,34 @@
 
 	<section class="blog-list">
 
-		<div class="blog-item">
+		<?php if (!empty($articles)) : ?>
+			<?php foreach ($articles as $article) : ?>
+				<div class="blog-item">
 
-			<img src="<?= base_url('assets/img/blog1.jpg') ?>">
+					<img src="https://via.placeholder.com/300x200?text=<?= urlencode($article->judul) ?>" alt="<?= htmlspecialchars($article->judul) ?>">
 
-			<span class="tag">Traveloka</span>
+					<span class="tag"><?= htmlspecialchars($article->penulis) ?></span>
 
-			<div class="blog-body">
+					<div class="blog-body">
 
-				<small>14 Jul 2024 • 4 min baca</small>
+						<small><?= date('d M Y', strtotime($article->tanggal)) ?> • Bacaan</small>
 
-				<h3>6 Spot Favorit Pantai Pecaron, Surga Tersembunyi di Kebumen</h3>
+						<h3><?= htmlspecialchars($article->judul) ?></h3>
 
-				<p>
-					Pantai Pecaron merupakan salah satu pantai di Kabupaten Kebumen yang memiliki suasana mirip dengan film Moana.
-				</p>
+						<p>
+							<?= htmlspecialchars(strlen($article->konten) > 100 ? substr($article->konten, 0, 100) . '...' : $article->konten) ?>
+						</p>
 
-				<a href="#">Baca Selengkapnya →</a>
+						<a href="#">Baca Selengkapnya →</a>
 
-			</div>
+					</div>
 
-		</div>
+				</div>
+			<?php endforeach; ?>
+		<?php else : ?>
+			<p style="text-align: center; padding: 40px;">Belum ada artikel yang dipublikasikan.</p>
+		<?php endif; ?>
 
-
-
-		<div class="blog-item">
-
-			<img src="<?= base_url('assets/img/blog2.jpg') ?>">
-
-			<span class="tag">Hidden Gems</span>
-
-			<div class="blog-body">
-
-				<small>23 Mar 2015 • 5 min baca</small>
-
-				<h3>Pantai Pecaron, Pantai Cantik di Selatan Desa Srati</h3>
-
-				<p>
-					Pantai Pecaron terletak di desa Srati Kecamatan Ayah Kabupaten Kebumen.
-				</p>
-
-				<a href="#">Baca Selengkapnya →</a>
-
-			</div>
-
-		</div>
-
-
-
-		<div class="blog-item">
-
-			<img src="<?= base_url('assets/img/blog3.jpg') ?>">
-
-			<span class="tag">Cerita Wisatawan</span>
-
-			<div class="blog-body">
-
-				<small>18 Agu 2021 • 8 min baca</small>
-
-				<h3>Bercumbu Kembali dengan Pantai Pecaron Indah Kebumen</h3>
-
-				<p>
-					Kisah perjalanan wisatawan untuk bersantai menikmati panorama pantai dan tebing indah.
-				</p>
-
-				<a href="#">Baca Selengkapnya →</a>
-
-			</div>
-
-		</div>
-
-	</section>
-	<section>
-		<h1>aldiman</h1>
 	</section>
 
 </body>

@@ -7,7 +7,7 @@
 	<title><?= isset($title) ? $title : 'home'; ?></title>
 	<link rel="stylesheet" href="<?= base_url('assets1/home.css'); ?>">
 	<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
@@ -56,33 +56,29 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 	<section id="services">
 
-		<h2>SERVICES</h2>
+		<h2>Wisata Indah Pantai Pecaron</h2>
 
-		<div class="service-container">
+		<div class="service-container" style="display: flex; flex-direction: column; gap: 20px;">
 
-			<div class="service-item">
-				<img src="img1.jpg">
-				<div class="service-text">
-					<h3>Keindahan Panorama</h3>
-					<p>Penjelasan layanan wisata pantai...</p>
-				</div>
-			</div>
-
-			<div class="service-item">
-				<img src="img2.jpg">
-				<div class="service-text">
-					<h3>Glamping Pecaron</h3>
-					<p>Penjelasan glamping...</p>
-				</div>
-			</div>
-
-			<div class="service-item">
-				<img src="img3.jpg">
-				<div class="service-text">
-					<h3>Camping Area</h3>
-					<p>Penjelasan camping...</p>
-				</div>
-			</div>
+			<?php if (!empty($services)) : ?>
+				<?php foreach ($services as $service) : ?>
+					<div class="service-item" style="display: flex; gap: 20px; align-items: flex-start; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+						<div style="flex-shrink: 0; width: 200px; height: 200px; overflow: hidden; border-radius: 8px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+							<?php if (!empty($service->file_gambar)) : ?>
+								<img src="<?= base_url('assets/images/wisata/' . $service->file_gambar) ?>" alt="<?= htmlspecialchars($service->nama_wisata) ?>" style="width: 100%; height: 100%; object-fit: cover;">
+							<?php else : ?>
+								<img src="https://via.placeholder.com/200x200?text=<?= urlencode($service->nama_wisata) ?>" alt="<?= htmlspecialchars($service->nama_wisata) ?>" style="width: 100%; height: 100%; object-fit: cover;">
+							<?php endif; ?>
+						</div>
+						<div class="service-text" style="flex: 1;">
+							<h3 style="margin-top: 0;"><?= htmlspecialchars($service->nama_wisata) ?></h3>
+							<p><?= htmlspecialchars($service->deskripsi) ?></p>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			<?php else : ?>
+				<p style="text-align: center;">Belum ada layanan yang ditambahkan.</p>
+			<?php endif; ?>
 
 		</div>
 
@@ -90,35 +86,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 	<section id="gallery">
 
-		<h2 class="gallery-title">Galeri Pantai</h2>
-		<p class="gallery-subtitle">Keindahan alam pantai Indonesia</p>
+		<h2 class="gallery-title">Foto Foto Keindahan Pantai Pecaron</h2>
+		<p class="gallery-subtitle">Keindahan Pantai Pecaron</p>
 
 		<div class="gallery-container">
-
-			<div class="gallery-item">
-				<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Pantai 1">
-			</div>
-
-			<div class="gallery-item">
-				<img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b" alt="Pantai 2">
-			</div>
-
-			<div class="gallery-item">
-				<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="Pantai 3">
-			</div>
-
-			<div class="gallery-item">
-				<img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e" alt="Pantai 4">
-			</div>
-
-			<div class="gallery-item">
-				<img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21" alt="Pantai 5">
-			</div>
-
-			<div class="gallery-item">
-				<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Pantai 6">
-			</div>
-
+			<?php if (!empty($gallery_images)) : ?>
+				<?php foreach ($gallery_images as $image) : ?>
+					<div class="gallery-item">
+						<img src="<?= base_url('assets/images/gallery/' . $image->file_gambar) ?>" alt="<?= htmlspecialchars($image->keterangan, ENT_QUOTES, 'UTF-8') ?>">
+					</div>
+				<?php endforeach; ?>
+			<?php else : ?>
+				<div class="gallery-item" style="grid-column: 1 / -1;">
+					<p style="margin: 0;">Belum ada gambar yang diunggah oleh admin.</p>
+				</div>
+			<?php endif; ?>
 		</div>
 
 	</section>

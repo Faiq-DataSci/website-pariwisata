@@ -13,10 +13,26 @@ class M_wisata extends CI_Model
                 nama_wisata VARCHAR(255) NOT NULL,
                 deskripsi TEXT NOT NULL,
                 kategori VARCHAR(100) NOT NULL,
-                status VARCHAR(50) NOT NULL
+                status VARCHAR(50) NOT NULL,
+                file_gambar VARCHAR(255)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         ";
         $this->db->query($query);
+        
+        // Add file_gambar column if it doesn't exist
+        $fields = $this->db->field_data('wisata');
+        $column_exists = false;
+        foreach ($fields as $field) {
+            if ($field->name === 'file_gambar') {
+                $column_exists = true;
+                break;
+            }
+        }
+        
+        if (!$column_exists) {
+            $alter_query = "ALTER TABLE wisata ADD COLUMN file_gambar VARCHAR(255)";
+            $this->db->query($alter_query);
+        }
     }
 
     public function get_data()
