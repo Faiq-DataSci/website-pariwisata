@@ -24,16 +24,17 @@
 
         .login-container {
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
             width: 100%;
-            max-width: 400px;
-            padding: 40px;
+            max-width: 420px;
+            padding: 44px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
         }
 
         .login-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
         }
 
         .login-header h1 {
@@ -76,20 +77,21 @@
 
         .login-btn {
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 14px;
+            background: #1a73e8;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
         }
 
         .login-btn:hover {
+            background: #1667c2;
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 20px rgba(26, 115, 232, 0.25);
         }
 
         .alert {
@@ -111,15 +113,56 @@
             border: 1px solid #cfc;
         }
 
+        .social-login {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: #555;
+            margin-bottom: 14px;
+            font-size: 13px;
+        }
+
+        .social-buttons {
+            display: grid;
+            gap: 12px;
+        }
+
+        .btn-social {
+            display: inline-block;
+            width: 100%;
+            padding: 12px 0;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+        }
+
+        .btn-google {
+            background: #db4437;
+        }
+
+        .btn-facebook {
+            background: #4267b2;
+        }
+
+        .btn-social:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
         .login-footer {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 24px;
             font-size: 13px;
-            color: #666;
+            color: #7a7a7a;
         }
 
         .login-footer a {
-            color: #667eea;
+            color: #1a73e8;
             text-decoration: none;
             font-weight: 600;
         }
@@ -162,6 +205,24 @@
 
             <button type="submit" class="login-btn">Masuk</button>
         </form>
+
+        <?php if (!empty($social_login_enabled)) : ?>
+            <div class="social-login">
+                <p>Atau masuk dengan</p>
+                <div class="social-buttons">
+                    <?php if (!empty($google_login_url)) : ?>
+                        <a href="<?= $google_login_url ?>" class="btn-social btn-google">Masuk dengan Google</a>
+                    <?php endif; ?>
+                    <?php if (!empty($facebook_login_url)) : ?>
+                        <a href="<?= $facebook_login_url ?>" class="btn-social btn-facebook">Masuk dengan Facebook</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php else : ?>
+            <div class="social-login">
+                <p>Login Google dan Facebook belum dikonfigurasi. Silakan hubungi administrator untuk mengaktifkannya.</p>
+            </div>
+        <?php endif; ?>
 
         <div class="login-footer">
             Belum punya akun? <a href="<?= base_url('website') ?>">Kembali ke beranda</a>

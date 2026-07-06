@@ -237,12 +237,24 @@ class Admin extends CI_Controller
         $konten = $this->input->post('konten');
         $status = $this->input->post('status');
 
+        $gambar_artikel = null;
+        if (!empty($_FILES['gambar_artikel']['name'])) {
+            $upload = $this->upload_artikel_image('gambar_artikel');
+            if ($upload['status']) {
+                $gambar_artikel = $upload['file_name'];
+            } else {
+                $this->session->set_flashdata('error', $upload['message']);
+                redirect('admin/tambah_artikel');
+            }
+        }
+
         $data = array(
             'judul' => $judul,
             'penulis' => $penulis,
             'tanggal' => $tanggal,
             'konten' => $konten,
-            'status' => $status
+            'status' => $status,
+            'gambar_artikel' => $gambar_artikel
         );
 
         $this->M_artikel->insert_data($data);
@@ -279,6 +291,20 @@ class Admin extends CI_Controller
             'status' => $status
         );
 
+        if (!empty($_FILES['gambar_artikel']['name'])) {
+            $upload = $this->upload_artikel_image('gambar_artikel');
+            if ($upload['status']) {
+                $artikel = $this->M_artikel->get_data_by_id($id);
+                if ($artikel && !empty($artikel->gambar_artikel) && file_exists(FCPATH . 'uploads/artikel/' . $artikel->gambar_artikel)) {
+                    @unlink(FCPATH . 'uploads/artikel/' . $artikel->gambar_artikel);
+                }
+                $data['gambar_artikel'] = $upload['file_name'];
+            } else {
+                $this->session->set_flashdata('error', $upload['message']);
+                redirect('admin/edit_artikel/' . $id);
+            }
+        }
+
         $where = array('id_artikel' => $id);
         $this->M_artikel->update_data($data, $where);
         redirect('admin/artikel');
@@ -287,9 +313,52 @@ class Admin extends CI_Controller
     public function hapus_artikel($id)
     {
         $this->load->model('M_artikel');
+        $artikel = $this->M_artikel->get_data_by_id($id);
+        if ($artikel && !empty($artikel->gambar_artikel) && file_exists(FCPATH . 'uploads/artikel/' . $artikel->gambar_artikel)) {
+            @unlink(FCPATH . 'uploads/artikel/' . $artikel->gambar_artikel);
+        }
+
         $where = array('id_artikel' => $id);
         $this->M_artikel->delete_data($where);
         redirect('admin/artikel');
+    }
+
+    private function upload_artikel_image($field_name)
+    {
+        $upload_path = './uploads/artikel/';
+        if (!is_dir($upload_path)) {
+            mkdir($upload_path, 0755, true);
+        }
+
+        $config['upload_path'] = $upload_path;
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
+        $config['max_size'] = 4096;
+        $config['encrypt_name'] = TRUE;
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload($field_name)) {
+            return array('status' => false, 'message' => strip_tags($this->upload->display_errors()));
+        }
+
+        $uploadData = $this->upload->data();
+        $file_name = $uploadData['file_name'];
+
+        $this->load->library('image_lib');
+        $config_img = array(
+            'image_library' => 'gd2',
+            'source_image' => $upload_path . $file_name,
+            'new_image' => $upload_path . $file_name,
+            'maintain_ratio' => TRUE,
+            'width' => 1200,
+            'height' => 800,
+            'quality' => '85%'
+        );
+        $this->image_lib->initialize($config_img);
+        $this->image_lib->resize();
+        $this->image_lib->clear();
+
+        return array('status' => true, 'file_name' => $file_name);
     }
 
     public function akun()

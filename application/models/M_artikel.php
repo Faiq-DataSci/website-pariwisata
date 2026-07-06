@@ -14,10 +14,15 @@ class M_artikel extends CI_Model
                 penulis VARCHAR(100) NOT NULL,
                 tanggal DATE NOT NULL,
                 konten TEXT NOT NULL,
+                gambar_artikel VARCHAR(255) DEFAULT NULL,
                 status VARCHAR(50) NOT NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         ";
         $this->db->query($query);
+
+        if (!$this->db->field_exists('gambar_artikel', 'artikel')) {
+            $this->db->query("ALTER TABLE artikel ADD COLUMN gambar_artikel VARCHAR(255) DEFAULT NULL");
+        }
     }
 
     public function get_data()

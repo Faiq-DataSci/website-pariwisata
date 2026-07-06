@@ -13,8 +13,10 @@
 
 		<?php if (!empty($articles)) :
 			$featured = $articles[0];
+			$featured_image = !empty($featured->gambar_artikel) ? base_url('uploads/artikel/' . $featured->gambar_artikel) : 'https://via.placeholder.com/1200x500?text=Artikel+Unggulan';
 		?>
 			<div class="blog-card">
+				<img src="<?= $featured_image ?>" alt="<?= htmlspecialchars($featured->judul) ?>" style="width:100%; height:auto; object-fit:cover; border-radius: 10px; margin-bottom: 20px;">
 
 				<div class="blog-content">
 
@@ -71,13 +73,9 @@
 		<?php if (!empty($articles)) : ?>
 			<?php foreach ($articles as $article) : ?>
 				<div class="blog-item">
-
-					<img src="https://via.placeholder.com/300x200?text=<?= urlencode($article->judul) ?>" alt="<?= htmlspecialchars($article->judul) ?>">
-
-					<span class="tag"><?= htmlspecialchars($article->penulis) ?></span>
+					<img src="<?= !empty($article->gambar_artikel) ? base_url('uploads/artikel/' . $article->gambar_artikel) : 'https://via.placeholder.com/300x200?text=' . urlencode($article->judul) ?>" alt="<?= htmlspecialchars($article->judul) ?>">
 
 					<div class="blog-body">
-
 						<small><?= date('d M Y', strtotime($article->tanggal)) ?> • Bacaan</small>
 
 						<h3><?= htmlspecialchars($article->judul) ?></h3>
@@ -87,9 +85,7 @@
 						</p>
 
 						<a href="#">Baca Selengkapnya →</a>
-
 					</div>
-
 				</div>
 			<?php endforeach; ?>
 		<?php else : ?>
