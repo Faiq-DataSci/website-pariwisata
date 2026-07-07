@@ -25,10 +25,6 @@
                 <?php if (!$this->session->userdata('user_login')) : ?>
 
                     <li>
-                        <a href="<?= site_url('website/destinations') ?>">Destinations</a>
-                    </li>
-
-                    <li>
                         <a href="<?= site_url('website/blog') ?>">Blog</a>
                     </li>
 
@@ -43,10 +39,6 @@
                     </li>
 
                 <?php else : ?>
-
-                    <li>
-                        <a href="<?= site_url('website/destinations') ?>">Destinations</a>
-                    </li>
 
                     <li>
                         <a href="<?= site_url('website/blog') ?>">Blog</a>
@@ -73,3 +65,27 @@
 
         </nav>
     </header>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var userMenu = document.getElementById('user-menu');
+            if (!userMenu) return;
+
+            // Cari tombol toggle yang ada di dalam li yang sama
+            var toggle = userMenu.parentElement.querySelector('a.btn-login');
+            if (!toggle) return;
+
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Toggle visibility
+                userMenu.style.display = (userMenu.style.display === 'block') ? 'none' : 'block';
+            });
+
+            // Tutup menu ketika klik di luar
+            document.addEventListener('click', function(e) {
+                if (!userMenu.contains(e.target) && !toggle.contains(e.target)) {
+                    userMenu.style.display = 'none';
+                }
+            });
+        });
+    </script>

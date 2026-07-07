@@ -614,6 +614,138 @@ class Admin extends CI_Controller
         redirect('admin/kontak');
     }
 
+    public function testimoni()
+    {
+        $this->load->model('M_testimoni');
+        $data['title'] = "Kelola Testimoni";
+        $data['active_menu'] = "testimoni";
+        $data['testimoni'] = $this->M_testimoni->get_data();
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_testimoni', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function tambah_testimoni()
+    {
+        $data['title'] = "Tambah Testimoni";
+        $data['active_menu'] = "testimoni";
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_testimoni_tambah', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function tambah_testimoni_aksi()
+    {
+        $this->load->model('M_testimoni');
+        $nama = $this->input->post('nama');
+        $isi = $this->input->post('isi');
+        $rating = $this->input->post('rating');
+        $status = $this->input->post('status');
+
+        $foto_name = null;
+        if (!empty($_FILES['foto']['name'])) {
+            $upload_path = './assets/images/testimoni/';
+            if (!is_dir($upload_path)) {
+                mkdir($upload_path, 0777, true);
+            }
+
+            $config['upload_path'] = $upload_path;
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = 2048;
+            $config['encrypt_name'] = TRUE;
+
+            $this->load->library('upload', $config);
+            if ($this->upload->do_upload('foto')) {
+                $uploadData = $this->upload->data();
+                $foto_name = $uploadData['file_name'];
+            }
+        }
+
+        $data = array(
+            'nama' => $nama,
+            'isi' => $isi,
+            'rating' => intval($rating),
+            'status' => $status,
+        );
+
+        if ($foto_name) {
+            $data['foto'] = $foto_name;
+        }
+
+        $this->M_testimoni->insert_data($data);
+        redirect('admin/testimoni');
+    }
+
+    public function edit_testimoni($id)
+    {
+        $this->load->model('M_testimoni');
+        $data['title'] = "Edit Testimoni";
+        $data['active_menu'] = "testimoni";
+        $data['testimoni'] = $this->M_testimoni->get_data_by_id($id);
+
+        $this->load->view('admin/layout/header', $data);
+        $this->load->view('admin/v_testimoni_edit', $data);
+        $this->load->view('admin/layout/footer');
+    }
+
+    public function edit_testimoni_aksi()
+    {
+        $this->load->model('M_testimoni');
+        $id = $this->input->post('id_testimoni');
+        $nama = $this->input->post('nama');
+        $isi = $this->input->post('isi');
+        $rating = $this->input->post('rating');
+        $status = $this->input->post('status');
+
+        $data = array(
+            'nama' => $nama,
+            'isi' => $isi,
+            'rating' => intval($rating),
+            'status' => $status,
+        );
+
+        if (!empty($_FILES['foto']['name'])) {
+            $testimonial = $this->M_testimoni->get_data_by_id($id);
+            if ($testimonial && !empty($testimonial->foto) && file_exists('./assets/images/testimoni/' . $testimonial->foto)) {
+                unlink('./assets/images/testimoni/' . $testimonial->foto);
+            }
+
+            $upload_path = './assets/images/testimoni/';
+            if (!is_dir($upload_path)) {
+                mkdir($upload_path, 0777, true);
+            }
+
+            $config['upload_path'] = $upload_path;
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = 2048;
+            $config['encrypt_name'] = TRUE;
+
+            $this->load->library('upload', $config);
+            if ($this->upload->do_upload('foto')) {
+                $uploadData = $this->upload->data();
+                $data['foto'] = $uploadData['file_name'];
+            }
+        }
+
+        $where = array('id_testimoni' => $id);
+        $this->M_testimoni->update_data($data, $where);
+        redirect('admin/testimoni');
+    }
+
+    public function hapus_testimoni($id)
+    {
+        $this->load->model('M_testimoni');
+        $testimonial = $this->M_testimoni->get_data_by_id($id);
+        if ($testimonial && !empty($testimonial->foto) && file_exists('./assets/images/testimoni/' . $testimonial->foto)) {
+            unlink('./assets/images/testimoni/' . $testimonial->foto);
+        }
+        $where = array('id_testimoni' => $id);
+        $this->M_testimoni->delete_data($where);
+        redirect('admin/testimoni');
+    }
+
     public function logout()
     {
         $data['logout'] = "keluar";

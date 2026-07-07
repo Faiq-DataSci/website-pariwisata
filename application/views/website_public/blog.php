@@ -32,7 +32,7 @@
 						<?= htmlspecialchars(strlen($featured->konten) > 150 ? substr($featured->konten, 0, 150) . '...' : $featured->konten) ?>
 					</p>
 
-					<a href="#" class="btn-blog">
+					<a href="<?= site_url('website/article/' . $featured->id_artikel) ?>" class="btn-blog">
 						Baca Selengkapnya →
 					</a>
 
@@ -84,7 +84,7 @@
 							<?= htmlspecialchars(strlen($article->konten) > 100 ? substr($article->konten, 0, 100) . '...' : $article->konten) ?>
 						</p>
 
-						<a href="#">Baca Selengkapnya →</a>
+						<a href="<?= site_url('website/article/' . $article->id_artikel) ?>">Baca Selengkapnya →</a>
 					</div>
 				</div>
 			<?php endforeach; ?>

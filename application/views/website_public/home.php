@@ -11,14 +11,16 @@
 </head>
 
 <body>
-	<section id="hero">
-		<h1>PANTAI PANCORAN</h1>
-		<p>Surga Tersembunyi Kebumen</p>
+	<section id="hero" style="position: relative; overflow: hidden; background: linear-gradient(rgba(128,128,128,0.65), rgba(128,128,128,0.65)), url('<?= base_url('assets/images/gallery/' . rawurlencode('pemandangan 2.jpeg')) ?>') center/cover no-repeat; min-height: 480px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; color: #fff;">
+		<div style="position: relative; z-index: 1; max-width: 900px; width: 100%;">
+			<h1 style="font-size: clamp(2.8rem, 5vw, 4.8rem); margin-bottom: 16px; letter-spacing: 0.1em;">PANTAI PECARON</h1>
+			<p style="font-size: clamp(1.1rem, 2vw, 1.5rem); margin: 0; line-height: 1.5;">Wisata Tersembunyi Kebumen</p>
+		</div>
 	</section>
 
 	<section id="hero3">
 
-		<h2 class="section-title">Pantai Pancoran</h2>
+		<h2 class="section-title">Pantai Pecaron</h2>
 
 		<div class="video-content">
 
@@ -26,23 +28,24 @@
 				<iframe
 					width="560"
 					height="315"
-					src="https://www.youtube.com/embed/VIDEO_ID"
+					src="https://www.youtube.com/embed/lQjJi5Rhggs"
 					title="Video Pantai Pancoran"
 					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen>
 				</iframe>
 			</div>
 
 			<div class="description">
-				<h3>Surga Tersembunyi di Kebumen</h3>
+				<h3>Wisata Tersembunyi di Kebumen</h3>
 				<p>
-					Pantai Pancoran menawarkan pemandangan alam yang indah dengan
+					Pantai Pecaron menawarkan pemandangan alam yang indah dengan
 					air laut yang jernih, tebing yang menjulang, dan suasana yang
 					tenang. Tempat ini cocok untuk menikmati liburan bersama
 					keluarga maupun teman.
 				</p>
 
-				<a href="#" class="btn">Pelajari Lebih Lanjut</a>
+				<a href="http://localhost/website-pariwisata/website#" class="btn">Pelajari Lebih Lanjut</a>
 			</div>
 
 		</div>
@@ -50,7 +53,7 @@
 	</section>
 
 	<section id="hero4">
-		<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Pantai Pancoran">
+		<img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Pantai Pecaron">
 	</section>
 
 
@@ -107,67 +110,39 @@
 
 	<section class="testimoni">
 
-		<h1>VOICE OF PARADISE</h1>
+		<h1>Komentar</h1>
 
 		<div class="container">
 
-			<div class="card">
-
-				<div class="star">★★★★★</div>
-
-				<p>
-					Salah satu hidden gem di Kebumen.
-					Air laut yang jernih, pasir putih,
-					dan pemandangan tebing yang memukau
-					membuat pengalaman berwisata
-					menjadi lebih berkesan.
-				</p>
-
-				<div class="user">
-					<img src="user1.jpg" alt="">
-					<span>Faiq Atha</span>
+			<?php if ($this->session->userdata('user_login')) : ?>
+				<form action="<?= site_url('website/submit_komentar') ?>" method="post" style="margin-bottom: 24px;">
+					<textarea name="komentar" rows="4" required style="width: 100%; padding: 16px; border: 1px solid #d1d5db; border-radius: 12px; font-size: 1rem; resize: vertical;">Saya ingin berbagi pengalaman berkunjung ke Pantai Pancoran...</textarea>
+					<button type="submit" class="btn" style="margin-top: 12px; padding: 12px 24px;">Kirim Komentar</button>
+				</form>
+			<?php else : ?>
+				<div style="margin-bottom: 24px; padding: 20px; border: 1px solid #e5e7eb; border-radius: 16px; background: #f8fafc; color: #374151;">
+					<p style="margin: 0 0 12px; font-weight: 600;">Silakan login terlebih dahulu untuk menambahkan komentar.</p>
+					<a href="<?= site_url('userauth/login') ?>" class="btn" style="display: inline-block; padding: 12px 24px;">Login</a>
 				</div>
+			<?php endif; ?>
 
-			</div>
-
-
-			<div class="card">
-
-				<div class="star">★★★★★</div>
-
-				<p>
-					"One of the best beaches in Kebumen.
-					The environment is calm and relaxing,
-					making it ideal for family trips and
-					weekend getaways."
-				</p>
-
-				<div class="user">
-					<img src="user2.jpg" alt="">
-					<span>Jonathan Abdi</span>
+			<?php if (!empty($comments)) : ?>
+				<?php foreach ($comments as $comment) : ?>
+					<div class="card">
+						<div class="star" style="margin-bottom: 10px;">★★★★★</div>
+						<p><?= nl2br(htmlspecialchars($comment->komentar, ENT_QUOTES, 'UTF-8')) ?></p>
+						<div class="user">
+							<img src="https://via.placeholder.com/80x80?text=User" alt="<?= htmlspecialchars($comment->nama) ?>">
+							<span><?= htmlspecialchars($comment->nama) ?></span>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			<?php else : ?>
+				<div class="card">
+					<div class="star">★★★★★</div>
+					<p>Belum ada komentar tersedia. Nantikan pembaruan dari pengguna.</p>
 				</div>
-
-			</div>
-
-
-
-			<div class="card">
-
-				<div class="star">★★★★★</div>
-
-				<p>
-					Bar pisan takon nang kana,
-					langsung seneng. Pantaine resik,
-					banyune bening lan suasane
-					isih alami. Mantep.
-				</p>
-
-				<div class="user">
-					<img src="user3.jpg" alt="">
-					<span>Raden Aldiman</span>
-				</div>
-
-			</div>
+			<?php endif; ?>
 
 		</div>
 
@@ -175,25 +150,25 @@
 
 	<section class="contact">
 
-		<h1>CONTACT</h1>
+		<h1>Kontak</h1>
 
 
 		<div class="info">
 
-			<div class="item">
+			<a href="https://www.instagram.com/pantai_pecaron?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="item" style="text-decoration: none; color: inherit;">
 				<i class="fa-solid fa-share-nodes"></i>
 				<p>Follow Us</p>
-			</div>
+			</a>
 
-			<div class="item">
+			<a href="https://maps.app.goo.gl/eiXtLiEqGh9kwBnA6" target="_blank" rel="noopener noreferrer" class="item" style="text-decoration: none; color: inherit;">
 				<i class="fa-regular fa-map"></i>
 				<p>Visit Us</p>
-			</div>
+			</a>
 
-			<div class="item">
+			<a href="https://mail.google.com/mail/?view=cm&fs=1&to=ppecaron@gmail.com" target="_blank" rel="noopener noreferrer" class="item" style="text-decoration: none; color: inherit;">
 				<i class="fa-regular fa-message"></i>
 				<p>Contact Us</p>
-			</div>
+			</a>
 
 		</div>
 
@@ -201,37 +176,37 @@
 
 		<div class="sosmed">
 
-			<a href="#">
+			<a href="https://www.instagram.com/pantai_pecaron?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
 				<div class="box">
 					<i class="fa-brands fa-instagram"></i>
 				</div>
 			</a>
 
-			<a href="#">
+			<a href="https://wa.me/6283856522476" target="_blank" rel="noopener noreferrer">
 				<div class="box">
 					<i class="fa-solid fa-mobile-screen"></i>
 				</div>
 			</a>
 
-			<a href="#">
+			<a href="https://mail.google.com/mail/?view=cm&fs=1&to=ppecaron@gmail.com" target="_blank" rel="noopener noreferrer">
 				<div class="box">
 					<i class="fa-regular fa-envelope"></i>
 				</div>
 			</a>
 
-			<a href="#">
+			<a href="https://www.facebook.com/share/1DbFfr5Bwt/" target="_blank" rel="noopener noreferrer">
 				<div class="box">
 					<i class="fa-brands fa-facebook-f"></i>
 				</div>
 			</a>
 
-			<a href="#">
+			<a href="" target="_blank" rel="noopener noreferrer">
 				<div class="box">
 					<i class="fa-brands fa-youtube"></i>
 				</div>
 			</a>
 
-			<a href="#">
+			<a href="https://www.tiktok.com/@pantai_pecaron?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer">
 				<div class="box">
 					<i class="fa-brands fa-tiktok"></i>
 				</div>

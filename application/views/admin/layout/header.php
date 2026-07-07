@@ -41,6 +41,12 @@
                         Kelola Artikel
                     </a>
                 </li>
+                <li>
+                    <a href="<?= base_url('admin/testimoni') ?>" class="<?= isset($active_menu) && $active_menu == 'testimoni' ? 'active' : '' ?>">
+                        <div class="menu-icon icon-artikel"></div>
+                        Kelola Testimoni
+                    </a>
+                </li>
             </ul>
 
             <div class="menu-label">Pengaturan</div>
