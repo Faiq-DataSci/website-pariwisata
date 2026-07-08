@@ -15,14 +15,14 @@ class Admin extends CI_Controller
 
     public function index()
     {
-        $this->load->model(['M_wisata', 'M_artikel', 'M_akun', 'M_kontak']);
+        $this->load->model(['M_wisata', 'M_artikel', 'M_akun', 'M_testimoni']);
 
         $data['title'] = "Dashboard";
         $data['active_menu'] = "dashboard";
         $data['total_wisata'] = $this->M_wisata->count_all();
         $data['total_artikel_published'] = $this->M_artikel->count_published();
         $data['total_akun'] = $this->M_akun->count_all();
-        $data['total_pesan_baru'] = $this->M_kontak->count_unread();
+        $data['total_testimoni_baru'] = $this->M_testimoni->count_pending();
 
         $this->load->view('admin/layout/header', $data);
         $this->load->view('admin/v_admin', $data);
@@ -729,6 +729,15 @@ class Admin extends CI_Controller
             }
         }
 
+        $where = array('id_testimoni' => $id);
+        $this->M_testimoni->update_data($data, $where);
+        redirect('admin/testimoni');
+    }
+
+    public function approve_testimoni($id)
+    {
+        $this->load->model('M_testimoni');
+        $data = array('status' => 'Aktif');
         $where = array('id_testimoni' => $id);
         $this->M_testimoni->update_data($data, $where);
         redirect('admin/testimoni');

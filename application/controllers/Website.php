@@ -26,26 +26,47 @@ class Website extends CI_Controller
         $this->load->view('website_public/layout/footer1', $data);
     }
 
-    public function submit_komentar()
+    public function submit_testimoni()
     {
         if (!$this->session->userdata('user_login')) {
             redirect('userauth/login');
         }
 
-        $this->load->model('M_komentar');
-        $komentar = trim($this->input->post('komentar'));
+        $this->load->model('M_testimoni');
+        $isi = trim($this->input->post('isi'));
+        $rating = $this->input->post('rating');
 
-        if (!empty($komentar)) {
+        if (!empty($isi)) {
             $data = array(
-                'user_id' => $this->session->userdata('user_id'),
-                'nama' => $this->session->userdata('nama_lengkap'),
-                'komentar' => $komentar,
-                'status' => 'Aktif'
+                'nama' => $this->session->userdata('nama_lengkap') ?: 'Pengguna',
+                'isi' => $isi,
+                'rating' => intval($rating),
+                'status' => 'Menunggu' // Harus di-approve admin
             );
-            $this->M_komentar->insert_data($data);
+
+            // Handle photo upload
+            if (!empty($_FILES['foto']['name'])) {
+                $upload_path = './assets/images/testimoni/';
+                if (!is_dir($upload_path)) {
+                    mkdir($upload_path, 0777, true);
+                }
+
+                $config['upload_path'] = $upload_path;
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size'] = 2048; // 2MB
+                $config['encrypt_name'] = TRUE;
+
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('foto')) {
+                    $uploadData = $this->upload->data();
+                    $data['foto'] = $uploadData['file_name'];
+                }
+            }
+
+            $this->M_testimoni->insert_data($data);
         }
 
-        redirect('website');
+        redirect('website#testimoni');
     }
 
     public function destinations()

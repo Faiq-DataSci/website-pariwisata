@@ -14,7 +14,11 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #f4f7f6;
+            background-image: radial-gradient(#f7941d 0.5px, transparent 0.5px), radial-gradient(#f7941d 0.5px, #f4f7f6 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -24,23 +28,30 @@
 
         .login-container {
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             width: 100%;
-            max-width: 420px;
-            padding: 44px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            max-width: 400px;
+            padding: 40px;
+            position: relative;
+            border-top: 5px solid #f7941d;
         }
 
         .login-header {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 30px;
         }
 
-        .login-header h1 {
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 10px;
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #222;
+            font-family: "Times New Roman", serif;
+            margin-bottom: 5px;
+        }
+
+        .logo span {
+            color: #f7941d;
         }
 
         .login-header p {
@@ -55,72 +66,77 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
+            color: #444;
             font-weight: 500;
             font-size: 14px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 14px;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #f7941d;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(247, 148, 29, 0.15);
         }
 
         .login-btn {
             width: 100%;
-            padding: 14px;
-            background: #1a73e8;
+            padding: 12px;
+            background: #f7941d;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 30px;
             font-size: 16px;
-            font-weight: 700;
+            font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
         }
 
         .login-btn:hover {
-            background: #1667c2;
+            background: #e67e00;
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(26, 115, 232, 0.25);
+            box-shadow: 0 5px 15px rgba(247, 148, 29, 0.3);
         }
 
         .alert {
             margin-bottom: 20px;
             padding: 12px;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 14px;
+            text-align: center;
         }
 
         .alert-error {
-            background-color: #fee;
+            background-color: #fdf2f2;
             color: #c33;
             border: 1px solid #fcc;
         }
 
         .alert-success {
-            background-color: #efe;
-            color: #3c3;
-            border: 1px solid #cfc;
+            background-color: #f2fdf4;
+            color: #28a745;
+            border: 1px solid #c3e6cb;
         }
 
         .social-login {
-            margin-top: 20px;
+            margin-top: 25px;
             text-align: center;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
         }
 
         .social-login p {
-            color: #555;
-            margin-bottom: 14px;
+            color: #777;
+            margin-bottom: 15px;
             font-size: 13px;
         }
 
@@ -133,11 +149,12 @@
             display: inline-block;
             width: 100%;
             padding: 12px 0;
-            border-radius: 10px;
+            border-radius: 8px;
             color: white;
             text-decoration: none;
-            font-weight: 700;
-            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            font-weight: 600;
+            font-size: 14px;
+            transition: opacity 0.2s, transform 0.2s;
         }
 
         .btn-google {
@@ -149,25 +166,26 @@
         }
 
         .btn-social:hover {
-            opacity: 0.95;
+            opacity: 0.9;
             transform: translateY(-1px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .login-footer {
             text-align: center;
-            margin-top: 24px;
-            font-size: 13px;
-            color: #7a7a7a;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
         }
 
         .login-footer a {
-            color: #1a73e8;
+            color: #f7941d;
             text-decoration: none;
             font-weight: 600;
+            transition: color 0.3s;
         }
 
         .login-footer a:hover {
+            color: #e67e00;
             text-decoration: underline;
         }
     </style>
@@ -176,8 +194,10 @@
 <body>
     <div class="login-container">
         <div class="login-header">
-            <h1>Masuk</h1>
-            <p>Masuk ke akun Pantai Pecaron Anda</p>
+            <div class="logo">
+                <span>Pantai</span> Pecaron
+            </div>
+            <p>Silakan masuk ke akun Anda</p>
         </div>
 
         <?php if ($this->session->flashdata('error')) : ?>
@@ -220,7 +240,7 @@
             </div>
         <?php else : ?>
             <div class="social-login">
-                <p>Login Google dan Facebook belum dikonfigurasi. Silakan hubungi administrator untuk mengaktifkannya.</p>
+                <p style="font-size: 12px; color: #999;">Login Google dan Facebook belum dikonfigurasi.</p>
             </div>
         <?php endif; ?>
 

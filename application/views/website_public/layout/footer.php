@@ -11,7 +11,7 @@
 
 <body>
 	<footer style="margin-top:50px;background:#222;color:white;padding:20px;text-align:center;">
-		<p>&copy; <?= date('Y'); ?> Nusantara Travel. All Rights Reserved.</p>
+		<p>&copy; <?= date('Y'); ?> Pantai Pecaron. All Rights Reserved.</p>
 	</footer>
 </body>
 

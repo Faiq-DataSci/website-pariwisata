@@ -63,12 +63,7 @@
                         Kelola Gambar
                     </a>
                 </li>
-                <li>
-                    <a href="<?= base_url('admin/kontak') ?>" class="<?= isset($active_menu) && $active_menu == 'kontak' ? 'active' : '' ?>">
-                        <div class="menu-icon icon-kontak"></div>
-                        Kelola Kontak
-                    </a>
-                </li>
+
             </ul>
 
             <div class="menu-logout">

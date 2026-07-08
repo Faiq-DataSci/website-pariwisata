@@ -16,7 +16,7 @@
 
             <div class="logo">
                 <a href="<?= site_url('website') ?>">
-                    <span>Nusantara</span> Travel
+                    <span>Pantai</span> Pecaron
                 </a>
             </div>
 

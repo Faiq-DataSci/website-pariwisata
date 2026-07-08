@@ -38,6 +38,9 @@
                             </td>
                             <td>
                                 <div class="action-btns">
+                                    <?php if (strtolower($t->status) == 'menunggu') : ?>
+                                        <a href="<?= base_url('admin/approve_testimoni/' . $t->id_testimoni) ?>" class="btn btn-sm btn-success" style="text-decoration: none;">Approve</a>
+                                    <?php endif; ?>
                                     <a href="<?= base_url('admin/edit_testimoni/' . $t->id_testimoni) ?>" class="btn btn-sm btn-edit" style="text-decoration: none;">Edit</a>
                                     <a href="<?= base_url('admin/hapus_testimoni/' . $t->id_testimoni) ?>" class="btn btn-sm btn-delete" style="text-decoration: none;" onclick="return confirm('Yakin ingin menghapus testimoni ini?')">Hapus</a>
                                 </div>

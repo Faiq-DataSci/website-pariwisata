@@ -35,6 +35,13 @@ class M_testimoni extends CI_Model
         return $this->db->get_where('testimoni', array('id_testimoni' => $id))->row();
     }
 
+    public function count_pending()
+    {
+        $this->db->from('testimoni');
+        $this->db->where('status', 'Menunggu');
+        return $this->db->count_all_results();
+    }
+
     public function insert_data($data)
     {
         return $this->db->insert('testimoni', $data);

@@ -44,13 +44,13 @@
 
     <div class="stat-card">
         <div class="stat-card-header">
-            <span class="stat-card-label">Pesan Baru</span>
+            <span class="stat-card-label">Ulasan Baru</span>
             <div class="stat-card-icon">
                 <div class="menu-icon icon-kontak"></div>
             </div>
         </div>
-        <div class="stat-card-value"><?= number_format($total_pesan_baru ?? 0) ?></div>
-        <div class="stat-card-desc">Belum dibaca</div>
+        <div class="stat-card-value"><?= number_format($total_testimoni_baru ?? 0) ?></div>
+        <div class="stat-card-desc">Menunggu approval</div>
     </div>
 </div>
 

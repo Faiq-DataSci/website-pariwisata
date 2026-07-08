@@ -110,37 +110,70 @@
 
 	<section class="testimoni">
 
-		<h1>Komentar</h1>
+		<h1>Testimoni & Pengalaman Wisata</h1>
 
 		<div class="container">
 
 			<?php if ($this->session->userdata('user_login')) : ?>
-				<form action="<?= site_url('website/submit_komentar') ?>" method="post" style="margin-bottom: 24px;">
-					<textarea name="komentar" rows="4" required style="width: 100%; padding: 16px; border: 1px solid #d1d5db; border-radius: 12px; font-size: 1rem; resize: vertical;">Saya ingin berbagi pengalaman berkunjung ke Pantai Pancoran...</textarea>
-					<button type="submit" class="btn" style="margin-top: 12px; padding: 12px 24px;">Kirim Komentar</button>
+				<form action="<?= site_url('website/submit_testimoni') ?>" method="post" enctype="multipart/form-data" style="margin-bottom: 24px; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600;">Pengalaman Anda:</label>
+					    <textarea name="isi" rows="4" required style="width: 100%; padding: 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; resize: vertical;" placeholder="Bagikan pengalaman menarik Anda di Pantai Pecaron..."></textarea>
+                    </div>
+                    
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 15px;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Rating:</label>
+                            <select name="rating" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px;">
+                                <option value="5">★★★★★ (5/5) Sangat Bagus</option>
+                                <option value="4">★★★★☆ (4/5) Bagus</option>
+                                <option value="3">★★★☆☆ (3/5) Cukup</option>
+                                <option value="2">★★☆☆☆ (2/5) Kurang</option>
+                                <option value="1">★☆☆☆☆ (1/5) Sangat Kurang</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Upload Foto Liburan (Opsional):</label>
+                            <input type="file" name="foto" accept="image/*" style="width: 100%; padding: 8px; border: 1px solid #d1d5db; border-radius: 8px;">
+                        </div>
+                    </div>
+
+					<button type="submit" class="btn" style="padding: 12px 24px;">Kirim Ulasan</button>
 				</form>
 			<?php else : ?>
 				<div style="margin-bottom: 24px; padding: 20px; border: 1px solid #e5e7eb; border-radius: 16px; background: #f8fafc; color: #374151;">
-					<p style="margin: 0 0 12px; font-weight: 600;">Silakan login terlebih dahulu untuk menambahkan komentar.</p>
+					<p style="margin: 0 0 12px; font-weight: 600;">Silakan login terlebih dahulu untuk membagikan pengalaman wisata Anda.</p>
 					<a href="<?= site_url('userauth/login') ?>" class="btn" style="display: inline-block; padding: 12px 24px;">Login</a>
 				</div>
 			<?php endif; ?>
 
-			<?php if (!empty($comments)) : ?>
-				<?php foreach ($comments as $comment) : ?>
-					<div class="card">
-						<div class="star" style="margin-bottom: 10px;">★★★★★</div>
-						<p><?= nl2br(htmlspecialchars($comment->komentar, ENT_QUOTES, 'UTF-8')) ?></p>
-						<div class="user">
-							<img src="https://via.placeholder.com/80x80?text=User" alt="<?= htmlspecialchars($comment->nama) ?>">
-							<span><?= htmlspecialchars($comment->nama) ?></span>
+			<?php if (!empty($testimonials)) : ?>
+				<?php foreach ($testimonials as $t) : ?>
+					<div class="card" style="display: flex; flex-direction: column; gap: 15px;">
+						<div class="star" style="color: #f59e0b; font-size: 1.2rem;">
+                            <?php 
+                                $rating = intval($t->rating);
+                                echo str_repeat('★', $rating) . str_repeat('☆', 5 - $rating);
+                            ?>
+                        </div>
+						<p style="flex: 1;"><?= nl2br(htmlspecialchars($t->isi, ENT_QUOTES, 'UTF-8')) ?></p>
+                        
+                        <?php if (!empty($t->foto) && file_exists('./assets/images/testimoni/' . $t->foto)) : ?>
+                            <div style="width: 100%; height: 150px; overflow: hidden; border-radius: 8px; margin-bottom: 10px;">
+                                <img src="<?= base_url('assets/images/testimoni/' . $t->foto) ?>" alt="Foto Testimoni" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        <?php endif; ?>
+
+						<div class="user" style="display: flex; align-items: center; gap: 10px;">
+							<img src="https://ui-avatars.com/api/?name=<?= urlencode($t->nama) ?>&background=random" alt="<?= htmlspecialchars($t->nama) ?>" style="width: 40px; height: 40px; border-radius: 50%;">
+							<span style="font-weight: 600;"><?= htmlspecialchars($t->nama) ?></span>
 						</div>
 					</div>
 				<?php endforeach; ?>
 			<?php else : ?>
 				<div class="card">
 					<div class="star">★★★★★</div>
-					<p>Belum ada komentar tersedia. Nantikan pembaruan dari pengguna.</p>
+					<p>Belum ada ulasan. Jadilah yang pertama membagikan pengalaman Anda!</p>
 				</div>
 			<?php endif; ?>
 
